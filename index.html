@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <Link rel="stylesheet"href="/css/style.css">
+</head>
+<body>
+
+<div class ="todo-container">
+    <h4>
+<i class ="bi bi-calendar-check"></i>TO-do_list
+    </h4>
+    <form class ="d-flex-mb-4 mt-4" th:action ="@{/add}" method="post" >
+
+      <input type="text"  name="title" placeholder="add your task" class="form-control todo-input" required >
+    <button class ="btn btn-add"ADD <span>+</span> </button>
+    </form>
+    <div th:if="${#lists.isEmpty(todos)} " class="text-centre text-muted">
+        No todo found
+    </div>
+    <div class="todo-list">
+<div th:each ="todo: ${todos}" class="todo-item">
+    <div class="d-flex align-items-center">
+        <a th:href ="@{/update/{id}(id=${todo.id})}">
+            <i class="bi" th:classappend="${todo.completed} ? bi-check-circle-fill check-icon': 'bi-circle unchecked-icon' "> </i>
+        </a>
+        <span th:text="${todo.title}" th:classappend="${todo.completed} ? 'completed' "></span>
+</div>
+<a href ="@{/delete/{id}(id=${todo.id})}" class="delete-btn">
+    <i class="bi bi-trash3"></i>
+</a>
+</div>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+        crossorigin="anonymous"></script>
+</body>
+</html>
